@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrato</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="extrato-container">
+        <h2>HISTÓRICO BANCÁRIO</h2>
+
+        <!-- Filtro de transações -->
+        <div class="filter-container">
+            <label for="filter">Filtrar por período:</label>
+            <select id="filter" onchange="showDateInput()">
+                <option value="">Selecione um período</option>
+                <option value="7">Últimos 7 dias</option>
+                <option value="15">Últimos 15 dias</option>
+                <option value="30">Últimos 30 dias</option>
+                <option value="month">Último mês</option>
+                <option value="year">Último ano</option>
+                <option value="specific">Data específica</option>
+            </select>
+            <input type="date" id="specificDate" style="display:none;">
+            <button id="filterButton" onclick="applyFilter()">Aplicar Filtro</button>
+        </div>
+
+        <!-- Lista de transações -->
+        <div class="transactions" id="transactionList">
+            <!-- Transações serão inseridas aqui pelo JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Simulação de dados de transações
+        const transactions = [
+            { date: '2023-11-01', description: 'Pagamento de conta', amount: -150.00 },
+            { date: '2023-11-10', description: 'Depósito', amount: 1000.00 },
+            { date: '2023-11-15', description: 'Compra no supermercado', amount: -200.00 },
+            { date: '2023-12-01', description: 'Pagamento de aluguel', amount: -800.00 },
+            { date: '2023-12-05', description: 'Transferência recebida', amount: 500.00 }
+        ];
+
+        function displayTransactions(transactionsToDisplay) {
+            const transactionList = document.getElementById('transactionList');
+            transactionList.innerHTML = ''; // Limpa as transações atuais
+
+            if (transactionsToDisplay.length === 0) {
+                transactionList.innerHTML = '<p>Nenhuma transação encontrada para o filtro selecionado.</p>';
+                return;
+            }
+
+            transactionsToDisplay.forEach(transaction => {
+                const transactionItem = document.createElement('div');
+                transactionItem.classList.add('transaction-item');
+                transactionItem.innerHTML = `
+                    <p><strong>Data:</strong> ${transaction.date}</p>
+                    <p><strong>Descrição:</strong> ${transaction.description}</p>
+                    <p><strong>Valor:</strong> ${transaction.amount.toFixed(2).replace('.', ',')} BRL</p>
+                `;
+                transactionList.appendChild(transactionItem);
+            });
+        }
+
+        function showDateInput() {
+            const filterValue = document.getElementById('filter').value;
+            const specificDateInput = document.getElementById('specificDate');
+
+            if (filterValue === 'specific') {
+                specificDateInput.style.display = 'inline';
+            } else {
+                specificDateInput.style.display = 'none';
+            }
+        }
+
+        function applyFilter() {
+            const filterValue = document.getElementById('filter').value;
+            const specificDateInput = document.getElementById('specificDate');
+            let filteredTransactions;
+
+            const today = new Date();
+            switch (filterValue) {
+                case '7':
+                    filteredTransactions = transactions.filter(t => {
+                        const date = new Date(t.date);
+                        return (today - date) <= (7 * 24 * 60 * 60 * 1000);
+                    });
+                    break;
+                case '15':
+                    filteredTransactions = transactions.filter(t => {
+                        const date = new Date(t.date);
+                        return (today - date) <= (15 * 24 * 60 * 60 * 1000);
+                    });
+                    break;
+                case '30':
+                    filteredTransactions = transactions.filter(t => {
+                        const date = new Date(t.date);
+                        return (today - date) <= (30 * 24 * 60 * 60 * 1000);
+                    });
+                    break;
+                case 'month':
+                    filteredTransactions = transactions.filter(t => {
+                        const date = new Date(t.date);
+                        return date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
+                    });
+                    break;
+                case 'year':
+                    filteredTransactions = transactions.filter(t => {
+                        const date = new Date(t.date);
+                        return date.getFullYear() === today.getFullYear();
+                    });
+                    break;
+                case 'specific':
+                    const specificDate = new Date(specificDateInput.value);
+                    if (specificDate.toString() === 'Invalid Date') {
+                        alert('Por favor, selecione uma data válida.');
+                        return;
+                    }
+                    filteredTransactions = transactions.filter(t => {
+                        const date = new Date(t.date);
+                        return date.toDateString() === specificDate.toDateString();
+                    });
+                    break;
+                default:
+                    alert('Por favor, selecione um período para filtrar.');
+                    return;
+            }
+            displayTransactions(filteredTransactions);
+        }
+    </script>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

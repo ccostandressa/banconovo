@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receber PIX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="receber-pix-container">
+        <h2>Receber PIX</h2>
+        <p>Compartilhe sua chave PIX para receber pagamentos.</p>
+        <label for="chavePixReceber">Sua Chave PIX:</label>
+        <input type="text" id="chavePixReceber" placeholder="Sua chave PIX" readonly>
+
+        <button onclick="copyKey()">Copiar chave PIX</button>
+    </div>
+
+    <script>
+        function copyKey() {
+            const keyField = document.getElementById('chavePixReceber');
+            keyField.select();
+            document.execCommand('copy');
+            alert('Chave PIX copiada para a área de transferência!');
+        }
+    </script>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

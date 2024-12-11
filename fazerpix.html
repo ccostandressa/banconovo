@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazer PIX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="fazer-pix-container">
+        <h2>Fazer PIX</h2>
+        <p>Escolha uma das opções abaixo para realizar sua transação:</p>
+
+        <!-- Botões de opções -->
+        <div class="pix-options">
+            <button onclick="navigateTo('recentes.html')">Recentes</button>
+            <button onclick="navigateTo('qrcode.html')">QRCode</button>
+            <button onclick="navigateTo('copia-cola.html')">Copia e Cola</button>
+            <button onclick="navigateTo('cpf-numero.html')">CPF/Número</button>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

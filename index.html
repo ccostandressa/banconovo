@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envio de E-mail</title>
+</head>
+<body>
+    <h1>Envio de E-mail com Nodemailer</h1>
+    <button id="sendEmailButton">Enviar E-mail</button>
+
+    <script>
+        document.getElementById('sendEmailButton').addEventListener('click', function() {
+            // Dados do e-mail
+            const emailData = {
+                email: 'destinatario@dominio.com', // Substitua pelo destinatário real
+                subject: 'Teste de E-mail',
+                text: 'Este é um teste de envio de e-mail usando Nodemailer.',
+            };
+
+            // Envia a requisição POST para o servidor
+            fetch('http://localhost:3001/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(emailData), // Envia os dados do e-mail como JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('E-mail enviado com sucesso!');
+            })
+            .catch(error => {
+                alert('Erro ao enviar o e-mail');
+                console.error('Erro:', error);
+            });
+        });
+    </script>
+</body>
+</html>

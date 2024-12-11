@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2 id="welcomeMessage"></h2>
+        <p id="accountInfo"></p>
+        <p id="lastAccess"></p>
+
+        <div class="services">
+            <button onclick="navigateTo('saldo.html')">Saldo</button>
+            <button onclick="navigateTo('cartoes.html')">Cartões</button>
+            <button onclick="navigateTo('investimentos.html')">Investimentos</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obter informações do usuário armazenadas
+            const loginData = JSON.parse(localStorage.getItem('loginData'));
+            const lastAccess = localStorage.getItem('lastAccess') || 'Primeiro acesso';
+            const accountNumber = localStorage.getItem('accountNumber') || generateAccountNumber();
+
+            if (!loginData) {
+                alert('Sessão inválida. Faça login novamente.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Armazenar o último acesso
+            const currentDate = new Date().toLocaleString('pt-BR');
+            localStorage.setItem('lastAccess', currentDate);
+
+            // Atribuir número de conta se ainda não existir
+            if (!localStorage.getItem('accountNumber')) {
+                localStorage.setItem('accountNumber', accountNumber);
+            }
+
+            // Exibir mensagem de boas-vindas e informações
+            document.getElementById('welcomeMessage').textContent = `Olá, ${loginData.cpf}. Bem-vindo ao ATLAS!`;
+            document.getElementById('accountInfo').textContent = `Número da Conta: ${accountNumber}`;
+            document.getElementById('lastAccess').textContent = `Último acesso: ${lastAccess}`;
+        });
+
+        function generateAccountNumber() {
+            return Math.floor(1000000000 + Math.random() * 9000000000); // Gera um número aleatório de 10 dígitos
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

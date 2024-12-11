@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Saldo</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link para Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Olá, [Nome do Usuário]!</h2>
+        <p class="welcome-message">Bem-vindo à sua conta.</p>
+
+        <div class="buttons-container">
+            <button class="button" onclick="toggleBalance()">
+                <i class="fas fa-wallet"></i> Ver Saldo
+            </button>
+            <button class="button" onclick="navigateTo('extrato.html')">
+                <i class="fas fa-history"></i> Ver Extrato
+            </button>
+            <button class="button" onclick="navigateTo('pagarconta.html')">
+                <i class="fas fa-file-invoice-dollar"></i> Pagar uma Conta
+            </button>
+            <button class="button" onclick="navigateTo('transferencia.html')">
+                <i class="fas fa-exchange-alt"></i> Fazer uma Transferência
+            </button>
+            <button class="button" onclick="navigateTo('fazerpix.html')">
+                <i class="fas fa-qrcode"></i> Fazer PIX
+            </button>
+        </div>
+
+        <!-- Seção de saldo -->
+        <div id="balance-display">
+            <h3>Saldo Disponível</h3>
+            <p id="balance-amount">R$ 1500,00</p>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function toggleBalance() {
+            const balanceDisplay = document.getElementById('balance-display');
+            if (balanceDisplay.style.display === 'none' || balanceDisplay.style.display === '') {
+                balanceDisplay.style.display = 'block';
+            } else {
+                balanceDisplay.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

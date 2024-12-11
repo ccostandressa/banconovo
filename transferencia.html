@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferência</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link para Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="transfer-container">
+        <h2>Fazer uma Transferência</h2>
+        <p class="description">De maneira fácil e rápida, você pode transferir valores para outra conta.</p>
+
+        <!-- Dados do usuário -->
+        <div class="user-info">
+            <p><strong>Nome:</strong> <span id="userName">[Nome do Usuário]</span></p>
+            <p><strong>Número da Conta:</strong> <span id="accountNumber">[Número da Conta]</span></p>
+            <p><strong>CPF:</strong> <span id="userCPF">[CPF do Usuário]</span></p>
+        </div>
+
+        <!-- Botões de opções -->
+        <div class="buttons-container">
+            <button class="button" onclick="navigateTo('nova-conta.html')">
+                <i class="fas fa-user-plus"></i> Transferir para nova conta
+            </button>
+            <button class="button" onclick="navigateTo('contas-cadastradas.html')">
+                <i class="fas fa-address-book"></i> Selecionar uma conta já cadastrada
+            </button>
+            <button class="button" onclick="navigateTo('gerenciar-contas.html')">
+                <i class="fas fa-cogs"></i> Gerenciar minhas contas salvas
+            </button>
+        </div>
+    </div>
+
+    <!-- Inclusão do arquivo JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar uma Conta</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script>
+        function startScanner() {
+            Quagga.init({
+                inputStream: {
+                    type: "LiveStream",
+                    target: document.querySelector('#barcode-scanner'),
+                    constraints: {
+                        facingMode: "environment"
+                    }
+                },
+                decoder: {
+                    readers: ["code_128_reader", "ean_reader", "upc_reader"]
+                }
+            }, function(err) {
+                if (err) {
+                    console.error(err);
+                    alert('Erro ao iniciar o scanner.');
+                    return;
+                }
+                Quagga.start();
+            });
+
+            Quagga.onDetected(function(result) {
+                alert('Código de barras detectado: ' + result.codeResult.code);
+                Quagga.stop();
+                document.getElementById('barcode').value = result.codeResult.code;
+            });
+        }
+
+        function pasteBarcode() {
+            const barcodeInput = document.getElementById('barcode');
+            const barcodeValue = barcodeInput.value;
+            if (barcodeValue) {
+                alert('Código de barras colado: ' + barcodeValue);
+                // Adicione a lógica para processar o código de barras e exibir os detalhes da conta.
+            } else {
+                alert('Por favor, cole o código de barras.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Pagar uma Conta</h2>
+        <p>Escaneie o código de barras ou cole o código abaixo para pagar sua conta.</p>
+
+        <!-- Botão para escanear o código de barras -->
+        <div class="option-container">
+            <button class="button" onclick="startScanner()">Escanear código de barras pela câmera</button>
+            <div id="barcode-scanner" style="width: 100%; height: 300px; margin-top: 20px;"></div>
+        </div>
+
+        <!-- Opção de copiar e colar código de barras -->
+        <div class="option-container">
+            <label for="barcode">Cole o código de barras:</label>
+            <input type="text" id="barcode" placeholder="Cole o código aqui" />
+            <button class="button" onclick="pasteBarcode()">Verificar código</button>
+        </div>
+    </div>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
